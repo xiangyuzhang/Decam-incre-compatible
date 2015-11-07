@@ -1,4 +1,18 @@
 \documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\rfoot{\thepage}
+\cfoot{Software User manual 0.0.0}
+ \lfoot{Umass Amherst}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+ 
 \usepackage{setspace}
 \title{\Huge{Oracle-Guided Incremental SAT Solver User manual}}
 \author{\small{Duo Liu, Cunxi Yu, Xiangyu Zhang, Daniel Holcomb}}
@@ -20,18 +34,46 @@
 	
 \newpage
 \tableofcontents
-
+\clearpage
 \section{Introduction}
 	\subsection{Purpose}
-	\subsection{Principle}
+	\paragraph{} Solving camouflage circuit is a notoriously NP problem. The Oracle-Guided Incremental SAT Solver (Solver) is specified in solving camouflage circuit with extremely high efficiency (5 times faster than existing best solver).  		
+	\subsection{Principle} 
+	\paragraph{}Solver executes a loop that continually finds new input and output vectors using SAT queries and an oracle circuit model. After some number of iterations, the constraints accumulated are sufficient to rule out all logical functions except for the one that is the true function of the obfuscated circuit. Detailed description please refer to citation. 
 	\subsection{Terminology}
-	\subsection{Performance}
-	\subsection{Call True}
+		\begin{itemize}
+			\item Oracle circuit: original circuit without any obfuscated gate.
+			\item Camouflage circuit: obfuscated $oracle$ circuit.
+			\item allowed bits: possible solution, known in advance, for camouflage circuit
+			\item forbidden bits: complementary set of allowed bits
+		\end{itemize}
+
 \section{Tutorial}
+	\subsection{Dependencies}
+		\begin{itemize}
+			\item minisat-incre-simp: main program.
+			\item decam-incre.py, genMtrs.py, grabNodes.py: parser, translate combinational circuits to CNF clauses by way of Tseitin encoding
+			\item completeset.py, testforbid.py: library, used to assign forbidden bits
+		\end{itemize}
 	\subsection{Initialization}
+		Makefile is included in directory, use command below to initialize working environment.
+		\newline 
+		\centerline{\$ make}
 	\subsection{Command}
+		After initializing, $solver$ can be accessed from command line:
+		\newline
+		\centerline{ \$ ./minisat-incre-simp decam-incre $<$oracle$.v>$ $<$camouflage$.v>$}
+			\begin{itemize}
+				\item $oracle$.v : input $oracle$ circuit path 
+				\item $camouflage$.v : input $camouflage$ circuit path
+			\end{itemize}
+		For example, if the oracle circuit is "c432-abcmap-fmt.v" and the camouflage circuit is "c432-mux4-101.v", then the command should be:
+		\newline
+		\centerline{\$ ./minisat-incre-simp decam-incre c432-abcmap-fmt.v c432-mux4-101.v}
 	\subsection{Sample input format}
+	$Solver$ only takes ABC format netlist, the following is an example: 
 	\subsection{Output}
+	\subsection{Call Tree}
 \section{History Version}
 \section{Contact}	
 
