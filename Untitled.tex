@@ -1,4 +1,8 @@
 \documentclass{article}
+
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{shapes,arrows}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{fancyhdr}
@@ -72,10 +76,80 @@
 		\centerline{\$ ./minisat-incre-simp decam-incre c432-abcmap-fmt.v c432-mux4-101.v}
 	\subsection{Sample input format}
 	$Solver$ only takes ABC format netlist, the following is an example: 
-	\subsection{Output}
+	\newline
+	\begin{tabular}{|p{13cm}|}
+ 		 \begin{verbatim}
+module	c17 (N1,N2,N3,N4,N5,N6,N7,N8,N9,N12,N13,N14);
+input N1,N2_new,N3,N4,N5  //RE__PI;
+input X_1 //RE__ALLOW(0,1);
+input p1,p2,p3,p4     //RE__ALLOW(1,0);
+output N6,N7;
+wire N9,N12,N13,N14,N3_NOT,N4_NOT,EX1,EX2,EX3,EX4,EX5,EX6,EX7,EX8,EX9,
+EX10,EX11,N2;
+			nand2 gate1( .a(N1), .b(N3), .O(N14) );
+			inv1 gate( .a(N3),.O(N3_NOT) );
+			inv1 gate( .a(N4),.O(N4_NOT));
+			and2 gate( .a(N3_NOT), .b(p1), .O(EX2) );
+			and2 gate( .a(N4_NOT), .b(EX2), .O(EX3) );
+			and2 gate( .a(N3), .b(p2), .O(EX4) );
+			and2 gate( .a(N4_NOT), .b(EX4), .O(EX5) );
+			and2 gate( .a(N3_NOT), .b(p3), .O(EX6) );
+			and2 gate( .a(N4), .b(EX6), .O(EX7) );
+			and2 gate( .a(N3), .b(p4), .O(EX8) );
+			and2 gate( .a(N4), .b(EX8), .O(EX9) );
+			or2  gate( .a(EX3), .b(EX5), .O(EX10) );
+			or2  gate( .a(EX7), .b(EX10), .O(EX11) );
+			or2  gate( .a(EX9), .b(EX11), .O(N9) );
+			nand2 gate3( .a(N2), .b(N9), .O(N13) );
+			nand2 gate4( .a(N5), .b(N9), .O(N12) );
+			nand2 gate5( .a(N14), .b(N13), .O(N6) );
+			nand2 gate6( .a(N12), .b(N12), .O(N7) );
+			xor2 gate( .a(X_1), .b(N2_new), .O(N2) );
+			endmodule
+  		\end{verbatim}
+	\end{tabular}
+	\newline
+	There are several points need attention:
+	\begin{itemize}
+		\item format is based on ABC format.
+		\item primary input should be noted by \///RE\_\_PI.
+		\item control bits should be noted by  \///RE\_\_ALLOW.
+		\item allowed bits for each group of control bits should be written after  \///RE\_\_ALLOW, for example  \///RE\_\_ALLOW(1,0). If one camouflage gate requires more than one bit, for example it needs two bits, use the format  \///RE\_\_ALLOW(00,01,10,11) alternatively. 
+	\end{itemize}
 	\subsection{Call Tree}
+	\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+  			  text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+	\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+   			 text width=7em, text centered, rounded corners, minimum height=4em]
+	\tikzstyle{line} = [draw, -latex']
+	\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    				minimum height=2em]
+	\begin{tikzpicture}[node distance = 3cm, auto]
+		\node[block](init){translate and build milter};
+		\node[block, below of = init](solver){solve to find a PI to differentiate two control bits};
+		\node[decision, below of = solver](decide){solvable?};
+		\node[block, left of = decide](find){find corresponding PO};
+		\node[block, above of = find](duplicate){duplicate camouflage circuit and assign newly found PIPO};
+		\node[block, right of = decide](finalSolu){based on collected PIPOs solve for final CB};
+		
+		\path[line](init) -- (solver);
+		\path[line](solver) -- (decide);
+		\path[line](decide) --node{Yes} (find);
+		\path[line](find) -- (duplicate);
+		\path[line](duplicate) -- (solver);
+		\path[line](decide) -- node{No}(finalSolu);
+		
+	\end{tikzpicture}
 \section{History Version}
-\section{Contact}	
+	\begin{itemize}
+		\item version 0.0.0, 04 Nov 2015
+	\end{itemize}
+\section{Contact}
+\section{Citation}
+	\begin{itemize}
+		\item\emph{Oracle-Guided Incremental SAT Solving to Reverse
+         Engineer Camouflaged Logic Circuits}
+	\end{itemize}		
 
 
 

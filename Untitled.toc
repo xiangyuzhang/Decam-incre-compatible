@@ -9,8 +9,8 @@
 \contentsline {subsection}{\numberline {2.1}Dependencies}{4}
 \contentsline {subsection}{\numberline {2.2}Initialization}{5}
 \contentsline {subsection}{\numberline {2.3}Command}{5}
-\contentsline {subsection}{\numberline {2.4}Sample input format}{5}
-\contentsline {subsection}{\numberline {2.5}Output}{5}
-\contentsline {subsection}{\numberline {2.6}Call Tree}{5}
-\contentsline {section}{\numberline {3}History Version}{5}
-\contentsline {section}{\numberline {4}Contact}{5}
+\contentsline {subsection}{\numberline {2.4}Sample input format}{6}
+\contentsline {subsection}{\numberline {2.5}Call Tree}{7}
+\contentsline {section}{\numberline {3}History Version}{7}
+\contentsline {section}{\numberline {4}Contact}{8}
+\contentsline {section}{\numberline {5}Citation}{8}
