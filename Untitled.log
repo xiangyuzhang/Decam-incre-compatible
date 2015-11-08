@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  7 NOV 2015 22:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  7 NOV 2015 22:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -751,10 +751,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 28.
+Package epstopdf Info: Source file: <umass-seal-2.eps>
+(epstopdf)                    date: 2015-11-07 21:34:27
+(epstopdf)                    size: 963624 bytes
+(epstopdf)             Output file: <umass-seal-2-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-11-07 21:41:31
+(epstopdf)                    size: 32013 bytes
+(epstopdf)             Command: <repstopdf --outfile=umass-seal-2-eps-converted
+-to.pdf umass-seal-2.eps>
+(epstopdf)             \includegraphics on input line 33.
+Package epstopdf Info: Output file is already uptodate.
 
-[1
+<umass-seal-2-eps-converted-to.pdf, id=4, 398.48875pt x 398.48875pt>
+File: umass-seal-2-eps-converted-to.pdf Graphic file (type pdf)
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<use umass-seal-2-eps-converted-to.pdf>
+Package pdftex.def Info: umass-seal-2-eps-converted-to.pdf used on input line 3
+3.
+(pdftex.def)             Requested size: 227.62204pt x 227.62129pt.
+ [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./umass
+-seal-2-eps-converted-to.pdf>]
 [2] (./Untitled.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
@@ -765,17 +783,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout4 = `Untitled.toc'.
 
  [3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 49.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 52.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
  [4
 
 ]
-Overfull \hbox (36.88582pt too wide) in paragraph at lines 78--113
+Overfull \hbox (36.88582pt too wide) in paragraph at lines 81--116
 [] 
  []
 
@@ -784,23 +802,23 @@ Overfull \vbox (21.3472pt too high) has occurred while \output is active []
 
 
 [6]
-Overfull \hbox (28.33952pt too wide) in paragraph at lines 117--118
+Overfull \hbox (28.33952pt too wide) in paragraph at lines 120--121
 []\OT1/cmr/m/n/10 allowed bits for each group of con-trol bits should be writ-t
 en af-ter //RE[][]ALLOW,
  []
 
 
-Overfull \hbox (52.31187pt too wide) in paragraph at lines 117--118
+Overfull \hbox (52.31187pt too wide) in paragraph at lines 120--121
 \OT1/cmr/m/n/10 than one bit, for ex-am-ple it needs two bits, use the for-mat 
 //RE[][]ALLOW(00,01,10,11)
  []
 
 [7] [8] (./Untitled.aux) ) 
 Here is how much of TeX's memory you used:
- 14514 strings out of 493089
- 310713 string characters out of 6134842
+ 14520 strings out of 493089
+ 310884 string characters out of 6134842
  373321 words of memory out of 5000000
- 17712 multiletter control sequences out of 15000+600000
+ 17716 multiletter control sequences out of 15000+600000
  9352 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,67p,410b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -816,10 +834,10 @@ m/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt10.pfb>
-Output written on Untitled.pdf (8 pages, 148392 bytes).
+Output written on Untitled.pdf (8 pages, 178361 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
