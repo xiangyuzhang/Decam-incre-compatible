@@ -44,7 +44,9 @@
 \clearpage
 \section{Introduction}
 	\subsection{Purpose}
-	\paragraph{} Solving camouflage circuit is a notoriously NP problem. The Oracle-Guided Incremental SAT Solver (Solver) is specified in solving camouflage circuit with extremely high efficiency (5 times faster than existing best solver).  		
+	\paragraph{} Solving camouflage circuit is a notoriously NP problem. The Oracle-Guided Incremental SAT Solver (Solver) is specified in solving camouflage circuit with extremely high efficiency (5 times faster than existing best solver).  	
+	\subsection{Problem formulation}
+	\paragraph{} The camouflage circuit model represents the reverse engineer's uncertainty about the logic gates. The oracle code represents the real physical object, where the user has only ability to apply inputs and observe outputs, but cannot look inside to see what the gates are. The $Solver$ will use $oracle$ circuit as guide to find solution for $camouflage$ circuit. 	
 	\subsection{Principle} 
 	\paragraph{}Solver executes a loop that continually finds new input and output vectors using SAT queries and an oracle circuit model. After some number of iterations, the constraints accumulated are sufficient to rule out all logical functions except for the one that is the true function of the obfuscated circuit. Detailed description please refer to citation. 
 	\subsection{Terminology}
@@ -58,10 +60,25 @@
 \section{Tutorial}
 	\subsection{Dependencies}
 		\begin{itemize}
-			\item minisat-incre-simp: main program.
-			\item decam-incre.py, genMtrs.py, grabNodes.py: parser, translate combinational circuits to CNF clauses by way of Tseitin encoding
-			\item completeset.py, testforbid.py: library, used to assign forbidden bits
-		\end{itemize}
+			\item MINISAT module: modified from original MINISAT
+				\begin{itemize}
+					\item Main.cc
+					\item SimpSolver.cc
+					\item SimpSolver.h
+				\end{itemize}
+			\item translator module: parse netlist and translate combinational circuits to CNF clauses by way of Tseitin encoding
+				\begin{itemize}
+					\item decam-incre.py
+					\item genMtrs.py
+					\item grabNodes.py
+					\item testforbid.py
+					\item completetest.py
+				\end{itemize}
+			\item executable: 
+				\begin{itemize}
+					\item minisat-incre-simp
+				\end{itemize}
+		
 	\subsection{Initialization}
 		Makefile is included in directory, use command below to initialize working environment.
 		\newline 
@@ -78,17 +95,17 @@
 		\newline
 		\centerline{\$ ./minisat-incre-simp decam-incre c432-abcmap-fmt.v c432-mux4-101.v}
 	\subsection{Sample input format}
-	$Solver$ only takes ABC format netlist, the following is an example: 
+	$Solver$ takes gate-level verilog, the following is an example: 
 	\newline
-	\begin{tabular}{|p{13cm}|}
+
  		 \begin{verbatim}
 module	c17 (N1,N2,N3,N4,N5,N6,N7,N8,N9,N12,N13,N14);
 input N1,N2_new,N3,N4,N5  //RE__PI;
 input X_1 //RE__ALLOW(0,1);
 input p1,p2,p3,p4     //RE__ALLOW(1,0);
 output N6,N7;
-wire N9,N12,N13,N14,N3_NOT,N4_NOT,EX1,EX2,EX3,EX4,EX5,EX6,EX7,EX8,EX9,
-EX10,EX11,N2;
+wire N9,N12,N13,N14,N3_NOT,N4_NOT,EX1,EX2,EX3,EX4,EX5,EX6,EX7,EX8,EX9,EX10,
+EX11,N2;
 			nand2 gate1( .a(N1), .b(N3), .O(N14) );
 			inv1 gate( .a(N3),.O(N3_NOT) );
 			inv1 gate( .a(N4),.O(N4_NOT));
@@ -110,16 +127,26 @@ EX10,EX11,N2;
 			xor2 gate( .a(X_1), .b(N2_new), .O(N2) );
 			endmodule
   		\end{verbatim}
-	\end{tabular}
-	\newline
+
+
 	There are several points need attention:
 	\begin{itemize}
-		\item format is based on ABC format.
+		\item can only process combinational circuit for now. 
 		\item primary input should be noted by \///RE\_\_PI.
 		\item control bits should be noted by  \///RE\_\_ALLOW.
 		\item allowed bits for each group of control bits should be written after  \///RE\_\_ALLOW, for example  \///RE\_\_ALLOW(1,0). If one camouflage gate requires more than one bit, for example it needs two bits, use the format  \///RE\_\_ALLOW(00,01,10,11) alternatively. 
+		\item solver can accept the following kinds of gate:
+			\begin{itemize}
+				\item inverter
+				\item AND gate
+				\item OR gate
+				\item XOR gate
+				\item NOR gate
+				\item NAND gate
+				\item BUF 
+			\end{itemize}
 	\end{itemize}
-	\subsection{Call Tree}
+	\subsection{Flow diagram}
 	\tikzstyle{decision} = [diamond, draw, fill=gray!20, 
   			  text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 	\tikzstyle{block} = [rectangle, draw, fill=gray!20, 
@@ -147,6 +174,8 @@ EX10,EX11,N2;
 	\begin{itemize}
 		\item version 0.0.0, 04 Nov 2015
 	\end{itemize}
+
+\end{itemize}
 \section{Contact}
 \section{Citation}
 	\begin{itemize}
